@@ -21,7 +21,7 @@ import org.springframework.credhub.core.credential.CredHubCredentialOperations;
 import org.springframework.credhub.core.info.CredHubInfoOperations;
 import org.springframework.credhub.core.interpolation.CredHubInterpolationOperations;
 import org.springframework.credhub.core.permission.CredHubPermissionOperations;
-import org.springframework.credhub.core.permissionV2.CredHubPermissionV2Operations;
+import org.springframework.credhub.core.permissionv2.CredHubPermissionV2Operations;
 import org.springframework.web.client.RestTemplate;
 
 /**

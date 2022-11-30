@@ -63,11 +63,11 @@ public final class ClientHttpConnectorFactory {
 			TrustManagerFactory trustManagerFactory = sslCertificateUtils
 					.createTrustManagerFactory(options.getCaCertFiles());
 
-			httpClient = httpClient.secure((sslContextSpec) -> sslContextSpec.sslContext(
+			httpClient = httpClient.secure(sslContextSpec -> sslContextSpec.sslContext(
 					SslContextBuilder.forClient().sslProvider(SslProvider.JDK).trustManager(trustManagerFactory)));
 		}
 		else {
-			httpClient = httpClient.secure((sslContextSpec) -> {
+			httpClient = httpClient.secure(sslContextSpec -> {
 				try {
 					sslContextSpec.sslContext(new JdkSslContext(SSLContext.getDefault(), true, null,
 							IdentityCipherSuiteFilter.INSTANCE, null, ClientAuth.REQUIRE, null, false));
@@ -81,7 +81,7 @@ public final class ClientHttpConnectorFactory {
 
 		if (options.getConnectionTimeout() != null) {
 			httpClient = httpClient
-					.tcpConfiguration((tcpClient) -> tcpClient.option(ChannelOption.CONNECT_TIMEOUT_MILLIS,
+					.tcpConfiguration(tcpClient -> tcpClient.option(ChannelOption.CONNECT_TIMEOUT_MILLIS,
 							Math.toIntExact(options.getConnectionTimeout().toMillis())));
 		}
 

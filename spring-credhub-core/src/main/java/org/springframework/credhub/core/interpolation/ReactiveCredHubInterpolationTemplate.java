@@ -51,7 +51,7 @@ public class ReactiveCredHubInterpolationTemplate implements ReactiveCredHubInte
 		Assert.notNull(serviceData, "serviceData must not be null");
 
 		return this.credHubOperations.doWithWebClient(
-				(webClient) -> webClient.post().uri(INTERPOLATE_URL_PATH).bodyValue(serviceData).retrieve()
+				webClient -> webClient.post().uri(INTERPOLATE_URL_PATH).bodyValue(serviceData).retrieve()
 						.onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(ServicesData.class));
 	}
 

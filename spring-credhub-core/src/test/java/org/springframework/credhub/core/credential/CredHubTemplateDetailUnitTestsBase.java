@@ -126,11 +126,8 @@ public abstract class CredHubTemplateDetailUnitTestsBase<T, P> extends CredHubCr
 	}
 
 	void verifyRegenerate(ResponseEntity<CredentialDetails<T>> expectedResponse) {
-		Map<String, Object> request = new HashMap<String, Object>() {
-			{
-				put(CredHubCredentialTemplate.NAME_REQUEST_FIELD, NAME.getName());
-			}
-		};
+		Map<String, Object> request = new HashMap<>();
+		request.put(CredHubCredentialTemplate.NAME_REQUEST_FIELD, NAME.getName());
 
 		given(this.restTemplate.exchange(eq(CredHubCredentialTemplate.REGENERATE_URL_PATH), eq(HttpMethod.POST),
 				eq(new HttpEntity<>(request)), isA(ParameterizedTypeReference.class))).willReturn(expectedResponse);

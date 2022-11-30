@@ -65,7 +65,7 @@ public class CredentialPath {
 
 		CredentialPath that = (CredentialPath) o;
 
-		return ((this.path != null) ? !this.path.equals(that.path) : (that.path != null));
+		return (this.path != null) ? !this.path.equals(that.path) : (that.path != null);
 	}
 
 	@Override

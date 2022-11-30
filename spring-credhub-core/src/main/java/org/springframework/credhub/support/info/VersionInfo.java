@@ -71,7 +71,7 @@ public class VersionInfo {
 	 * @return {@code true} if the server implements the CredHub v2.0 API; {@code false}
 	 * otherwise
 	 */
-	public boolean isVersion2_0() {
+	public boolean isVersion20() {
 		return this.version.startsWith("2.0");
 	}
 
@@ -80,7 +80,7 @@ public class VersionInfo {
 	 * @return {@code true} if the server implements the CredHub v2.1 API; {@code false}
 	 * otherwise
 	 */
-	public boolean isVersion2_1() {
+	public boolean isVersion21() {
 		return this.version.startsWith("2.1");
 	}
 

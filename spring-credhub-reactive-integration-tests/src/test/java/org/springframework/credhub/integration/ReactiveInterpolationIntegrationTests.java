@@ -59,18 +59,15 @@ public class ReactiveInterpolationIntegrationTests extends ReactiveCredHubIntegr
 	@Test
 	@SuppressWarnings("unchecked")
 	public void interpolate() throws IOException {
-		Map<String, Object> json = new HashMap<String, Object>() {
-			{
-				put("url", "https://example.com");
-				put("username", "user");
-				put("password", "secret");
-			}
-		};
+		Map<String, Object> json = new HashMap<>();
+		json.put("url", "https://example.com");
+		json.put("username", "user");
+		json.put("password", "secret");
 
 		StepVerifier
 				.create(this.credentials
 						.write(JsonCredentialRequest.builder().name(CREDENTIAL_NAME).value(json).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue()).isEqualTo(json);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.JSON);
@@ -78,7 +75,7 @@ public class ReactiveInterpolationIntegrationTests extends ReactiveCredHubIntegr
 				}).verifyComplete();
 
 		StepVerifier.create(this.interpolation.interpolateServiceData(buildVcapServices(CREDENTIAL_NAME.getName())))
-				.assertNext((servicesData) -> {
+				.assertNext(servicesData -> {
 					assertThat(servicesData).containsKey("service-offering");
 					assertThat(servicesData.get("service-offering")).hasSize(1);
 					assertThat(servicesData.get("service-offering").get(0)).containsKey("credentials");

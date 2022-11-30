@@ -46,7 +46,7 @@ public class CredHubOAuth2AutoConfigurationTests {
 
 	@Test
 	public void oauth2ContextConfigured() {
-		this.context.withPropertyValues(this.oAuth2ClientProperties).run((context) -> {
+		this.context.withPropertyValues(this.oAuth2ClientProperties).run(context -> {
 			assertServletOAuth2ContextConfigured(context);
 			assertReactiveOAuth2ContextConfigured(context);
 		});
@@ -55,7 +55,7 @@ public class CredHubOAuth2AutoConfigurationTests {
 	@Test
 	public void oauth2ContextConfiguredWithoutWebClient() {
 		this.context.withClassLoader(new FilteredClassLoader(WebClient.class))
-				.withPropertyValues(this.oAuth2ClientProperties).run((context) -> {
+				.withPropertyValues(this.oAuth2ClientProperties).run(context -> {
 					assertServletOAuth2ContextConfigured(context);
 					assertReactiveOAuth2ContextNotConfigured(context);
 				});
@@ -64,7 +64,7 @@ public class CredHubOAuth2AutoConfigurationTests {
 	@Test
 	public void oauth2ContextConfiguredWithWebApp() {
 		new WebApplicationContextRunner().withConfiguration(AutoConfigurations.of(this.configurations))
-				.withPropertyValues(this.oAuth2ClientProperties).run((context) -> {
+				.withPropertyValues(this.oAuth2ClientProperties).run(context -> {
 					assertServletOAuth2ContextConfigured(context);
 					assertReactiveOAuth2ContextConfigured(context);
 				});
@@ -73,7 +73,7 @@ public class CredHubOAuth2AutoConfigurationTests {
 	@Test
 	public void oauth2ContextConfiguredWithReactiveWebApp() {
 		new ReactiveWebApplicationContextRunner().withConfiguration(AutoConfigurations.of(this.configurations))
-				.withPropertyValues(this.oAuth2ClientProperties).run((context) -> {
+				.withPropertyValues(this.oAuth2ClientProperties).run(context -> {
 					assertServletOAuth2ContextConfigured(context);
 					assertReactiveOAuth2ContextConfigured(context);
 				});
@@ -83,7 +83,7 @@ public class CredHubOAuth2AutoConfigurationTests {
 	public void oauth2ContextConfiguredWithReactiveWebAppNoServlet() {
 		new ReactiveWebApplicationContextRunner().withClassLoader(new FilteredClassLoader("javax.servlet"))
 				.withConfiguration(AutoConfigurations.of(this.configurations))
-				.withPropertyValues(this.oAuth2ClientProperties).run((context) -> {
+				.withPropertyValues(this.oAuth2ClientProperties).run(context -> {
 					assertServletOAuth2ContextNotConfigured(context);
 					assertReactiveOAuth2ContextConfigured(context);
 				});

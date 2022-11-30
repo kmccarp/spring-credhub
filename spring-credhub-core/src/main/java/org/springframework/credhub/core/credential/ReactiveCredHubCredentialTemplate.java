@@ -79,7 +79,7 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		};
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.put().uri(BASE_URL_PATH).bodyValue(credentialRequest)
+				.doWithWebClient(webClient -> webClient.put().uri(BASE_URL_PATH).bodyValue(credentialRequest)
 						.retrieve().onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(ref));
 	}
 
@@ -92,7 +92,7 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		};
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.post().uri(BASE_URL_PATH).bodyValue(parametersRequest)
+				.doWithWebClient(webClient -> webClient.post().uri(BASE_URL_PATH).bodyValue(parametersRequest)
 						.retrieve().onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(ref));
 	}
 
@@ -108,7 +108,7 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		request.put(NAME_REQUEST_FIELD, name.getName());
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.post().uri(REGENERATE_URL_PATH).bodyValue(request).retrieve()
+				.doWithWebClient(webClient -> webClient.post().uri(REGENERATE_URL_PATH).bodyValue(request).retrieve()
 						.onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(ref));
 	}
 
@@ -120,7 +120,7 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		final ParameterizedTypeReference<CredentialDetails<T>> ref = new ParameterizedTypeReference<CredentialDetails<T>>() {
 		};
 
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.get().uri(ID_URL_PATH, id).retrieve()
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.get().uri(ID_URL_PATH, id).retrieve()
 				.onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(ref));
 	}
 
@@ -133,9 +133,9 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		};
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.get().uri(NAME_URL_QUERY_CURRENT, name.getName()).retrieve()
+				.doWithWebClient(webClient -> webClient.get().uri(NAME_URL_QUERY_CURRENT, name.getName()).retrieve()
 						.onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(ref)
-						.map((body) -> body.getData().get(0)));
+						.map(body -> body.getData().get(0)));
 	}
 
 	@Override
@@ -147,9 +147,9 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		final ParameterizedTypeReference<CredentialDetailsData<T>> ref = new ParameterizedTypeReference<CredentialDetailsData<T>>() {
 		};
 
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.get().uri(NAME_URL_QUERY, name.getName())
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.get().uri(NAME_URL_QUERY, name.getName())
 				.retrieve().onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToFlux(ref)
-				.flatMap((body) -> Flux.fromIterable(body.getData())));
+				.flatMap(body -> Flux.fromIterable(body.getData())));
 	}
 
 	@Override
@@ -162,29 +162,29 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		};
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.get().uri(NAME_URL_QUERY_VERSIONS, name.getName(), versions)
+				.doWithWebClient(webClient -> webClient.get().uri(NAME_URL_QUERY_VERSIONS, name.getName(), versions)
 						.retrieve().onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToFlux(ref)
-						.flatMap((body) -> Flux.fromIterable(body.getData())));
+						.flatMap(body -> Flux.fromIterable(body.getData())));
 	}
 
 	@Override
 	public Flux<CredentialSummary> findByName(final CredentialName name) {
 		Assert.notNull(name, "credential name must not be null");
 
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.get()
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.get()
 				.uri(NAME_LIKE_URL_QUERY, name.getName()).retrieve()
 				.onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(CredentialSummaryData.class)
-				.flatMapMany((data) -> Flux.fromIterable(data.getCredentials())));
+				.flatMapMany(data -> Flux.fromIterable(data.getCredentials())));
 	}
 
 	@Override
 	public Flux<CredentialSummary> findByPath(final String path) {
 		Assert.notNull(path, "credential path must not be null");
 
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.get().uri(PATH_URL_QUERY, path)
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.get().uri(PATH_URL_QUERY, path)
 				.retrieve().onStatus(HttpStatus::isError, ExceptionUtils::buildError)
 				.bodyToMono(CredentialSummaryData.class)
-				.flatMapMany((data) -> Flux.fromIterable(data.getCredentials())));
+				.flatMapMany(data -> Flux.fromIterable(data.getCredentials())));
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public class ReactiveCredHubCredentialTemplate implements ReactiveCredHubCredent
 		Assert.notNull(name, "credential name must not be null");
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.delete().uri(NAME_URL_QUERY, name.getName()).retrieve()
+				.doWithWebClient(webClient -> webClient.delete().uri(NAME_URL_QUERY, name.getName()).retrieve()
 						.onStatus(HttpStatus::isError, ExceptionUtils::buildError).bodyToMono(Void.class));
 	}
 

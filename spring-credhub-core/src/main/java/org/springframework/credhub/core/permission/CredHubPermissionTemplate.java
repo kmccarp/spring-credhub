@@ -56,7 +56,7 @@ public class CredHubPermissionTemplate implements CredHubPermissionOperations {
 	public List<Permission> getPermissions(final CredentialName name) {
 		Assert.notNull(name, "credential name must not be null");
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialPermissions> response = restOperations.getForEntity(PERMISSIONS_URL_QUERY,
 					CredentialPermissions.class, name.getName());
 			return response.getBody().getPermissions();
@@ -69,7 +69,7 @@ public class CredHubPermissionTemplate implements CredHubPermissionOperations {
 
 		final CredentialPermissions credentialPermissions = new CredentialPermissions(name, permissions);
 
-		this.credHubOperations.doWithRest((restOperations) -> {
+		this.credHubOperations.doWithRest(restOperations -> {
 			restOperations.exchange(PERMISSIONS_URL_PATH, HttpMethod.POST, new HttpEntity<>(credentialPermissions),
 					CredentialPermissions.class);
 			return null;
@@ -81,7 +81,7 @@ public class CredHubPermissionTemplate implements CredHubPermissionOperations {
 		Assert.notNull(name, "credential name must not be null");
 		Assert.notNull(actor, "actor must not be null");
 
-		this.credHubOperations.doWithRest((restOperations) -> {
+		this.credHubOperations.doWithRest(restOperations -> {
 			restOperations.delete(PERMISSIONS_ACTOR_URL_QUERY, name.getName(), actor.getIdentity());
 			return null;
 		});

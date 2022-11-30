@@ -33,8 +33,8 @@ public class VersionInfoTests extends JsonParsingUnitTestsBase {
 		assertThat(versionInfo.getVersion()).isEqualTo("1.9.0");
 		assertThat(versionInfo.isVersion1()).isTrue();
 		assertThat(versionInfo.isVersion2()).isFalse();
-		assertThat(versionInfo.isVersion2_0()).isFalse();
-		assertThat(versionInfo.isVersion2_1()).isFalse();
+		assertThat(versionInfo.isVersion20()).isFalse();
+		assertThat(versionInfo.isVersion21()).isFalse();
 	}
 
 	@Test
@@ -46,8 +46,8 @@ public class VersionInfoTests extends JsonParsingUnitTestsBase {
 		assertThat(versionInfo.getVersion()).isEqualTo("2.0.2");
 		assertThat(versionInfo.isVersion1()).isFalse();
 		assertThat(versionInfo.isVersion2()).isTrue();
-		assertThat(versionInfo.isVersion2_0()).isTrue();
-		assertThat(versionInfo.isVersion2_1()).isFalse();
+		assertThat(versionInfo.isVersion20()).isTrue();
+		assertThat(versionInfo.isVersion21()).isFalse();
 	}
 
 	@Test
@@ -59,8 +59,8 @@ public class VersionInfoTests extends JsonParsingUnitTestsBase {
 		assertThat(versionInfo.getVersion()).isEqualTo("2.1.2");
 		assertThat(versionInfo.isVersion1()).isFalse();
 		assertThat(versionInfo.isVersion2()).isTrue();
-		assertThat(versionInfo.isVersion2_0()).isFalse();
-		assertThat(versionInfo.isVersion2_1()).isTrue();
+		assertThat(versionInfo.isVersion20()).isFalse();
+		assertThat(versionInfo.isVersion21()).isTrue();
 	}
 
 }
