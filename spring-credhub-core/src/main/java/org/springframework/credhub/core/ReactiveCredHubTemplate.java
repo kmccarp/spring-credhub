@@ -30,8 +30,8 @@ import org.springframework.credhub.core.interpolation.ReactiveCredHubInterpolati
 import org.springframework.credhub.core.interpolation.ReactiveCredHubInterpolationTemplate;
 import org.springframework.credhub.core.permission.ReactiveCredHubPermissionOperations;
 import org.springframework.credhub.core.permission.ReactiveCredHubPermissionTemplate;
-import org.springframework.credhub.core.permissionV2.ReactiveCredHubPermissionV2Operations;
-import org.springframework.credhub.core.permissionV2.ReactiveCredHubPermissionV2Template;
+import org.springframework.credhub.core.permissionv2.ReactiveCredHubPermissionV2Operations;
+import org.springframework.credhub.core.permissionv2.ReactiveCredHubPermissionV2Template;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.security.oauth2.client.ReactiveOAuth2AuthorizedClientManager;

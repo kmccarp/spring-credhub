@@ -62,7 +62,7 @@ public class CredHubAutoConfigurationTests {
 				.withPropertyValues("spring.credhub.url=https://localhost",
 						"spring.credhub.oauth2.registration-id=test-client", "spring.credhub.connection-timeout=30",
 						"spring.credhub.read-timeout=60")
-				.run((context) -> assertThat(context).doesNotHaveBean(ClientHttpConnector.class));
+				.run(context -> assertThat(context).doesNotHaveBean(ClientHttpConnector.class));
 	}
 
 	private void assertPropertiesConfigured(AssertableApplicationContext context) {
