@@ -109,7 +109,7 @@ public class UserParametersRequest extends ParametersRequest<PasswordParameters>
 	 */
 	public static class UserValue {
 
-		private String username;
+		private final String username;
 
 		UserValue(String username) {
 			this.username = username;

@@ -59,7 +59,7 @@ public abstract class ReactiveCredHubIntegrationTests {
 	}
 
 	void deleteCredentialIfExists(CredentialName credentialName) {
-		this.operations.credentials().deleteByName(credentialName).onErrorResume((e) -> Mono.empty()).block();
+		this.operations.credentials().deleteByName(credentialName).onErrorResume(e -> Mono.empty()).block();
 	}
 
 }

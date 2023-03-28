@@ -17,4 +17,4 @@
 /**
  * Core API abstractions for permission operations.
  */
-package org.springframework.credhub.core.permissionV2;
+package org.springframework.credhub.core.permissionv2;
