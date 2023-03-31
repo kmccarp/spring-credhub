@@ -47,7 +47,7 @@ public class CredHubInfoTemplate implements CredHubInfoOperations {
 	 */
 	@Override
 	public VersionInfo version() {
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<VersionInfo> response = restOperations.getForEntity(VERSION_URL_PATH, VersionInfo.class);
 
 			ExceptionUtils.throwExceptionOnError(response);

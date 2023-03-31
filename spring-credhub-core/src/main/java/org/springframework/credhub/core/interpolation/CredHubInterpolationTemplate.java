@@ -49,7 +49,7 @@ public class CredHubInterpolationTemplate implements CredHubInterpolationOperati
 	public ServicesData interpolateServiceData(final ServicesData serviceData) {
 		Assert.notNull(serviceData, "serviceData must not be null");
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<ServicesData> response = restOperations.exchange(INTERPOLATE_URL_PATH, HttpMethod.POST,
 					new HttpEntity<>(serviceData), ServicesData.class);
 

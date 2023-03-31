@@ -65,6 +65,8 @@ import java.util.Map;
  */
 public class ServicesData extends HashMap<String, List<Map<String, Object>>> {
 
+	private static final long serialVersionUID = 1;
+
 	public ServicesData() {
 	}
 

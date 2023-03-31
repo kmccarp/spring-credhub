@@ -78,7 +78,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 		final ParameterizedTypeReference<CredentialDetails<T>> ref = new ParameterizedTypeReference<CredentialDetails<T>>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialDetails<T>> response = restOperations.exchange(BASE_URL_PATH, HttpMethod.PUT,
 					new HttpEntity<>(credentialRequest), ref);
 
@@ -95,7 +95,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 		final ParameterizedTypeReference<CredentialDetails<T>> ref = new ParameterizedTypeReference<CredentialDetails<T>>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialDetails<T>> response = restOperations.exchange(BASE_URL_PATH, HttpMethod.POST,
 					new HttpEntity<>(parametersRequest), ref);
 
@@ -113,7 +113,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 		final ParameterizedTypeReference<CredentialDetails<T>> ref = new ParameterizedTypeReference<CredentialDetails<T>>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			Map<String, Object> request = new HashMap<>(1);
 			request.put(NAME_REQUEST_FIELD, name.getName());
 
@@ -134,7 +134,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 		final ParameterizedTypeReference<CredentialDetails<T>> ref = new ParameterizedTypeReference<CredentialDetails<T>>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialDetails<T>> response = restOperations.exchange(ID_URL_PATH, HttpMethod.GET, null,
 					ref, id);
 
@@ -152,7 +152,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 		final ParameterizedTypeReference<CredentialDetailsData<T>> ref = new ParameterizedTypeReference<CredentialDetailsData<T>>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialDetailsData<T>> response = restOperations.exchange(NAME_URL_QUERY_CURRENT,
 					HttpMethod.GET, null, ref, name.getName());
 
@@ -171,7 +171,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 		final ParameterizedTypeReference<CredentialDetailsData<T>> ref = new ParameterizedTypeReference<CredentialDetailsData<T>>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialDetailsData<T>> response = restOperations.exchange(NAME_URL_QUERY, HttpMethod.GET,
 					null, ref, name.getName());
 
@@ -190,7 +190,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 		final ParameterizedTypeReference<CredentialDetailsData<T>> ref = new ParameterizedTypeReference<CredentialDetailsData<T>>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialDetailsData<T>> response = restOperations.exchange(NAME_URL_QUERY_VERSIONS,
 					HttpMethod.GET, null, ref, name.getName(), versions);
 
@@ -204,7 +204,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 	public List<CredentialSummary> findByName(final CredentialName name) {
 		Assert.notNull(name, "credential name must not be null");
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialSummaryData> response = restOperations.getForEntity(NAME_LIKE_URL_QUERY,
 					CredentialSummaryData.class, name.getName());
 
@@ -218,7 +218,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 	public List<CredentialSummary> findByPath(final String path) {
 		Assert.notNull(path, "credential path must not be null");
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialSummaryData> response = restOperations.getForEntity(PATH_URL_QUERY,
 					CredentialSummaryData.class, path);
 
@@ -232,7 +232,7 @@ public class CredHubCredentialTemplate implements CredHubCredentialOperations {
 	public void deleteByName(final CredentialName name) {
 		Assert.notNull(name, "credential name must not be null");
 
-		this.credHubOperations.doWithRest((restOperations) -> {
+		this.credHubOperations.doWithRest(restOperations -> {
 			restOperations.delete(NAME_URL_QUERY, name.getName());
 			return null;
 		});

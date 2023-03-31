@@ -17,7 +17,6 @@
 package org.springframework.credhub.configuration;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -132,7 +131,7 @@ class SslCertificateUtils {
 
 	private BufferedInputStream getFileStream(String fileName) {
 		try {
-			FileInputStream fileStream = new FileInputStream(new File(fileName));
+			FileInputStream fileStream = new FileInputStream(fileName);
 			return new BufferedInputStream(fileStream);
 		}
 		catch (FileNotFoundException ex) {

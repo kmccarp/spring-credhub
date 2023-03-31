@@ -25,7 +25,7 @@ import org.springframework.credhub.core.credential.ReactiveCredHubCredentialOper
 import org.springframework.credhub.core.info.ReactiveCredHubInfoOperations;
 import org.springframework.credhub.core.interpolation.ReactiveCredHubInterpolationOperations;
 import org.springframework.credhub.core.permission.ReactiveCredHubPermissionOperations;
-import org.springframework.credhub.core.permissionV2.ReactiveCredHubPermissionV2Operations;
+import org.springframework.credhub.core.permissionv2.ReactiveCredHubPermissionV2Operations;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
