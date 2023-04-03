@@ -28,6 +28,8 @@ import java.util.Map;
  */
 public class JsonCredential extends HashMap<String, Object> {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Create a {@code JsonCredential}.
 	 * @see HashMap#HashMap()

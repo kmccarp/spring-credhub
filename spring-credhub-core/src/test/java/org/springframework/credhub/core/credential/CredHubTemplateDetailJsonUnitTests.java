@@ -34,12 +34,12 @@ import org.springframework.http.ResponseEntity;
 
 public class CredHubTemplateDetailJsonUnitTests extends CredHubTemplateDetailUnitTestsBase<JsonCredential, Void> {
 
-	private static final JsonCredential CREDENTIAL = new JsonCredential() {
-		{
-			put("data", "value");
-			put("test", true);
-		}
-	};
+	private static final JsonCredential CREDENTIAL;
+	static {
+		CREDENTIAL = new JsonCredential<>();
+		put("data", "value");
+		put("test", true);
+	}
 
 	@Override
 	public CredentialRequest<JsonCredential> getWriteRequest() {

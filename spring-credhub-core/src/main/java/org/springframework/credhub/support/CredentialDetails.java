@@ -107,10 +107,7 @@ public class CredentialDetails<T> extends CredentialSummary {
 		if (this.credentialType != that.credentialType) {
 			return false;
 		}
-		if ((this.value != null) ? !this.value.equals(that.value) : (that.value != null)) {
-			return false;
-		}
-		return true;
+		return !((this.value != null) ? !this.value.equals(that.value) : (that.value != null));
 	}
 
 	@Override

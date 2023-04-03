@@ -23,7 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.credhub.core.credential.CredHubCredentialOperations;
-import org.springframework.credhub.core.permissionV2.CredHubPermissionV2Operations;
+import org.springframework.credhub.core.permissionv2.CredHubPermissionV2Operations;
 import org.springframework.credhub.support.CredentialPermission;
 import org.springframework.credhub.support.SimpleCredentialName;
 import org.springframework.credhub.support.permissions.Actor;

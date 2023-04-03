@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.credhub.core.permissionV2;
+package org.springframework.credhub.core.permissionv2;
 
 import reactor.core.publisher.Mono;
 

@@ -26,8 +26,8 @@ import org.springframework.credhub.core.interpolation.CredHubInterpolationOperat
 import org.springframework.credhub.core.interpolation.CredHubInterpolationTemplate;
 import org.springframework.credhub.core.permission.CredHubPermissionOperations;
 import org.springframework.credhub.core.permission.CredHubPermissionTemplate;
-import org.springframework.credhub.core.permissionV2.CredHubPermissionV2Operations;
-import org.springframework.credhub.core.permissionV2.CredHubPermissionV2Template;
+import org.springframework.credhub.core.permissionv2.CredHubPermissionV2Operations;
+import org.springframework.credhub.core.permissionv2.CredHubPermissionV2Template;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;

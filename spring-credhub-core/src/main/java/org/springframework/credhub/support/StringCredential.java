@@ -49,11 +49,7 @@ public class StringCredential {
 
 		StringCredential that = (StringCredential) o;
 
-		if ((this.value != null) ? !this.value.equals(that.value) : (that.value != null)) {
-			return false;
-		}
-
-		return true;
+		return !((this.value != null) ? !this.value.equals(that.value) : (that.value != null));
 	}
 
 	@Override
