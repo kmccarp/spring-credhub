@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 import org.springframework.credhub.core.credential.ReactiveCredHubCredentialOperations;
-import org.springframework.credhub.core.permissionV2.ReactiveCredHubPermissionV2Operations;
+import org.springframework.credhub.core.permissionv2.ReactiveCredHubPermissionV2Operations;
 import org.springframework.credhub.support.CredentialPermission;
 import org.springframework.credhub.support.SimpleCredentialName;
 import org.springframework.credhub.support.permissions.Actor;
@@ -70,7 +70,7 @@ public class ReactivePermissionV2IntegrationTests extends ReactiveCredHubIntegra
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value(CREDENTIAL_VALUE).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName()).isEqualTo(CREDENTIAL_NAME);
 					assertThat(response.getId()).isNotNull();
 				}).verifyComplete();
@@ -79,7 +79,7 @@ public class ReactivePermissionV2IntegrationTests extends ReactiveCredHubIntegra
 				.operations(Operation.READ, Operation.WRITE, Operation.DELETE).build();
 
 		StepVerifier.create(this.permissions.addPermissions(CREDENTIAL_NAME, clientPermission))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getId()).isNotNull();
 					assertThat(response.getPath()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertPermissions(response, ActorType.OAUTH_CLIENT, "client1", Operation.READ, Operation.WRITE,
@@ -88,7 +88,7 @@ public class ReactivePermissionV2IntegrationTests extends ReactiveCredHubIntegra
 					permissionId.set(response.getId());
 				}).verifyComplete();
 
-		StepVerifier.create(this.permissions.getPermissions(permissionId.get())).assertNext((response) -> {
+		StepVerifier.create(this.permissions.getPermissions(permissionId.get())).assertNext(response -> {
 			assertThat(response.getId()).isEqualTo(permissionId.get());
 			assertThat(response.getPath()).isEqualTo(CREDENTIAL_NAME.getName());
 			assertPermissions(response, ActorType.OAUTH_CLIENT, "client1", Operation.READ, Operation.WRITE,
@@ -107,7 +107,7 @@ public class ReactivePermissionV2IntegrationTests extends ReactiveCredHubIntegra
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value(CREDENTIAL_VALUE).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName()).isEqualTo(CREDENTIAL_NAME);
 					assertThat(response.getId()).isNotNull();
 				}).verifyComplete();
@@ -116,7 +116,7 @@ public class ReactivePermissionV2IntegrationTests extends ReactiveCredHubIntegra
 				.operations(Operation.READ, Operation.WRITE, Operation.DELETE).build();
 
 		StepVerifier.create(this.permissions.addPermissions(CREDENTIAL_NAME, clientPermission))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getId()).isNotNull();
 					assertThat(response.getPath()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertPermissions(response, ActorType.OAUTH_CLIENT, "client1", Operation.READ, Operation.WRITE,
@@ -129,14 +129,14 @@ public class ReactivePermissionV2IntegrationTests extends ReactiveCredHubIntegra
 				.operations(Operation.READ_ACL, Operation.WRITE_ACL).build();
 
 		StepVerifier.create(this.permissions.updatePermissions(permissionId.get(), CREDENTIAL_NAME, newPermission))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getId()).isEqualTo(permissionId.get());
 					assertThat(response.getPath()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertPermissions(response, ActorType.OAUTH_CLIENT, "client1", Operation.READ_ACL,
 							Operation.WRITE_ACL);
 				}).verifyComplete();
 
-		StepVerifier.create(this.permissions.getPermissions(permissionId.get())).assertNext((response) -> {
+		StepVerifier.create(this.permissions.getPermissions(permissionId.get())).assertNext(response -> {
 			assertThat(response.getId()).isEqualTo(permissionId.get());
 			assertThat(response.getPath()).isEqualTo(CREDENTIAL_NAME.getName());
 			assertPermissions(response, ActorType.OAUTH_CLIENT, "client1", Operation.READ_ACL, Operation.WRITE_ACL);

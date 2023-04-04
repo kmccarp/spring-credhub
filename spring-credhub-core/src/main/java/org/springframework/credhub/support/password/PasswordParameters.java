@@ -121,15 +121,15 @@ public class PasswordParameters {
 	 */
 	public static class PasswordParametersBuilder {
 
-		private Integer length = null;
+		private Integer length;
 
-		private Boolean excludeUpper = null;
+		private Boolean excludeUpper;
 
-		private Boolean excludeLower = null;
+		private Boolean excludeLower;
 
-		private Boolean excludeNumber = null;
+		private Boolean excludeNumber;
 
-		private Boolean includeSpecial = null;
+		private Boolean includeSpecial;
 
 		/**
 		 * Set the value of the password length parameter.

@@ -74,6 +74,8 @@ class CredHubOAuth2RequestInterceptor implements ClientHttpRequestInterceptor {
 
 	private static class OAuth2ClientCredentialsGrantAuthenticationToken extends AbstractAuthenticationToken {
 
+		private static final long serialVersionUID = 1;
+
 		private final ClientRegistration clientRegistration;
 
 		OAuth2ClientCredentialsGrantAuthenticationToken(ClientRegistration clientRegistration) {
