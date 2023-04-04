@@ -72,19 +72,19 @@ public class ReactiveCredHubCertificateTemplate implements ReactiveCredHubCertif
 
 	@Override
 	public Flux<CertificateSummary> getAll() {
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.get().uri(BASE_URL_PATH).retrieve()
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.get().uri(BASE_URL_PATH).retrieve()
 				.onStatus(HttpStatusCode::isError, ExceptionUtils::buildError).bodyToMono(CertificateSummaryData.class)
-				.flatMapMany((data) -> Flux.fromIterable(data.getCertificates())));
+				.flatMapMany(data -> Flux.fromIterable(data.getCertificates())));
 	}
 
 	@Override
 	public Mono<CertificateSummary> getByName(final CredentialName name) {
 		Assert.notNull(name, "certificate name must not be null");
 
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.get().uri(NAME_URL_QUERY, name.getName())
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.get().uri(NAME_URL_QUERY, name.getName())
 				.retrieve().onStatus(HttpStatusCode::isError, ExceptionUtils::buildError)
 				.bodyToMono(CertificateSummaryData.class)
-				.flatMapMany((data) -> Flux.fromIterable(data.getCertificates()))).single();
+				.flatMapMany(data -> Flux.fromIterable(data.getCertificates()))).single();
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class ReactiveCredHubCertificateTemplate implements ReactiveCredHubCertif
 		request.put(TRANSITIONAL_REQUEST_FIELD, setAsTransitional);
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.post().uri(REGENERATE_URL_PATH, id).bodyValue(request)
+				.doWithWebClient(webClient -> webClient.post().uri(REGENERATE_URL_PATH, id).bodyValue(request)
 						.retrieve().onStatus(HttpStatusCode::isError, ExceptionUtils::buildError).bodyToMono(ref));
 	}
 
@@ -113,9 +113,9 @@ public class ReactiveCredHubCertificateTemplate implements ReactiveCredHubCertif
 		request.put(SIGNED_BY_REQUEST_FIELD, certificateName.getName());
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.post().uri(BULK_REGENERATE_URL_PATH).bodyValue(request)
+				.doWithWebClient(webClient -> webClient.post().uri(BULK_REGENERATE_URL_PATH).bodyValue(request)
 						.retrieve().onStatus(HttpStatusCode::isError, ExceptionUtils::buildError).bodyToFlux(ref)
-						.flatMap((body) -> Flux.fromIterable(body.get(REGENERATED_CREDENTIALS_RESPONSE_FIELD))));
+						.flatMap(body -> Flux.fromIterable(body.get(REGENERATED_CREDENTIALS_RESPONSE_FIELD))));
 	}
 
 	public Flux<CertificateCredentialDetails> updateTransitionalVersion(final String id, final String versionId) {
@@ -125,7 +125,7 @@ public class ReactiveCredHubCertificateTemplate implements ReactiveCredHubCertif
 		request.put(VERSION_REQUEST_FIELD, versionId);
 
 		return this.credHubOperations
-				.doWithWebClient((webClient) -> webClient.put().uri(UPDATE_TRANSITIONAL_URL_PATH, id).bodyValue(request)
+				.doWithWebClient(webClient -> webClient.put().uri(UPDATE_TRANSITIONAL_URL_PATH, id).bodyValue(request)
 						.retrieve().onStatus(HttpStatusCode::isError, ExceptionUtils::buildError)
 						.bodyToFlux(CertificateCredentialDetails.class));
 	}
