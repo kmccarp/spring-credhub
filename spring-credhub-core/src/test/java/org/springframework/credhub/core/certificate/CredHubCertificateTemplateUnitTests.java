@@ -121,15 +121,12 @@ public class CredHubCertificateTemplateUnitTests {
 	@SuppressWarnings("unchecked")
 	public void bulkRegenerate() {
 		Map<String, List<CredentialName>> expectedResponse = Collections.singletonMap(
-				CredHubCertificateTemplate.REGENERATED_CREDENTIALS_RESPONSE_FIELD,
-				Arrays.asList(new SimpleCredentialName("example-certificate1"),
-						new SimpleCredentialName("example-certificate2")));
+		CredHubCertificateTemplate.REGENERATED_CREDENTIALS_RESPONSE_FIELD,
+		Arrays.asList(new SimpleCredentialName("example-certificate1"),
+	new SimpleCredentialName("example-certificate2")));
 
-		Map<String, Object> request = new HashMap<String, Object>() {
-			{
-				put(CredHubCertificateTemplate.SIGNED_BY_REQUEST_FIELD, NAME.getName());
-			}
-		};
+		Map<String, Object> request = new HashMap<>();
+		request.put(CredHubCertificateTemplate.SIGNED_BY_REQUEST_FIELD,NAME.getName());
 
 		given(this.restTemplate.exchange(eq(CredHubCertificateTemplate.BULK_REGENERATE_URL_PATH), eq(HttpMethod.POST),
 				eq(new HttpEntity<>(request)), isA(ParameterizedTypeReference.class)))
