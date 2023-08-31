@@ -56,10 +56,10 @@ public class ReactiveCredHubPermissionTemplate implements ReactiveCredHubPermiss
 	public Flux<Permission> getPermissions(final CredentialName name) {
 		Assert.notNull(name, "credential name must not be null");
 
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.get()
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.get()
 				.uri(PERMISSIONS_URL_QUERY, name.getName()).retrieve()
 				.onStatus(HttpStatusCode::isError, ExceptionUtils::buildError).bodyToMono(CredentialPermissions.class)
-				.flatMapMany((data) -> Flux.fromIterable(data.getPermissions())));
+				.flatMapMany(data -> Flux.fromIterable(data.getPermissions())));
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ReactiveCredHubPermissionTemplate implements ReactiveCredHubPermiss
 		final CredentialPermissions credentialPermissions = new CredentialPermissions(name, permissions);
 
 		return this.credHubOperations.doWithWebClient(
-				(webClient) -> webClient.post().uri(PERMISSIONS_URL_PATH).bodyValue(credentialPermissions).retrieve()
+				webClient -> webClient.post().uri(PERMISSIONS_URL_PATH).bodyValue(credentialPermissions).retrieve()
 						.onStatus(HttpStatusCode::isError, ExceptionUtils::buildError).bodyToMono(Void.class));
 	}
 
@@ -78,7 +78,7 @@ public class ReactiveCredHubPermissionTemplate implements ReactiveCredHubPermiss
 		Assert.notNull(name, "credential name must not be null");
 		Assert.notNull(actor, "actor must not be null");
 
-		return this.credHubOperations.doWithWebClient((webClient) -> webClient.delete()
+		return this.credHubOperations.doWithWebClient(webClient -> webClient.delete()
 				.uri(PERMISSIONS_ACTOR_URL_QUERY, name.getName(), actor.getIdentity()).retrieve()
 				.onStatus(HttpStatusCode::isError, ExceptionUtils::buildError).bodyToMono(Void.class));
 	}

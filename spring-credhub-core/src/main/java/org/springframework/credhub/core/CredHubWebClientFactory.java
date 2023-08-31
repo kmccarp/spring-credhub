@@ -94,14 +94,14 @@ final class CredHubWebClientFactory {
 				clientManager);
 
 		return buildWebClient(properties.getUrl(), clientHttpConnector).filter(oauth).defaultRequest(
-				(requestHeadersSpec) -> requestHeadersSpec.attributes(ServerOAuth2AuthorizedClientExchangeFilterFunction
+				requestHeadersSpec -> requestHeadersSpec.attributes(ServerOAuth2AuthorizedClientExchangeFilterFunction
 						.clientRegistrationId(properties.getOauth2().getRegistrationId())))
 				.build();
 	}
 
 	private static ReactiveOAuth2AuthorizedClientProvider buildClientProvider(ClientHttpConnector clientHttpConnector) {
 		return ReactiveOAuth2AuthorizedClientProviderBuilder.builder().authorizationCode()
-				.clientCredentials((b) -> b.accessTokenResponseClient(buildTokenResponseClient(clientHttpConnector)))
+				.clientCredentials(b -> b.accessTokenResponseClient(buildTokenResponseClient(clientHttpConnector)))
 				.build();
 	}
 
@@ -123,7 +123,7 @@ final class CredHubWebClientFactory {
 	}
 
 	private static WebClient.Builder buildWebClient(String baseUri, ClientHttpConnector clientHttpConnector) {
-		ExchangeStrategies strategies = ExchangeStrategies.builder().codecs((configurer) -> {
+		ExchangeStrategies strategies = ExchangeStrategies.builder().codecs(configurer -> {
 			ObjectMapper mapper = JsonUtils.buildObjectMapper();
 
 			CodecConfigurer.DefaultCodecs dc = configurer.defaultCodecs();
