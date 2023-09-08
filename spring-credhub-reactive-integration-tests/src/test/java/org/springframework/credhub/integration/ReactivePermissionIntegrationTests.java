@@ -67,7 +67,7 @@ public class ReactivePermissionIntegrationTests extends ReactiveCredHubIntegrati
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value(CREDENTIAL_VALUE).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName()).isEqualTo(CREDENTIAL_NAME);
 					assertThat(response.getId()).isNotNull();
 				}).verifyComplete();
@@ -84,16 +84,16 @@ public class ReactivePermissionIntegrationTests extends ReactiveCredHubIntegrati
 
 		StepVerifier.create(this.permissions.getPermissions(CREDENTIAL_NAME))
 				.assertNext(
-						(response) -> assertThat(response.getActor().getAuthType()).isEqualTo(ActorType.OAUTH_CLIENT))
-				.assertNext((response) -> assertThat(response).isEqualTo(appPermission))
-				.assertNext((response) -> assertThat(response).isEqualTo(userPermission))
-				.assertNext((response) -> assertThat(response).isEqualTo(clientPermission)).verifyComplete();
+						response -> assertThat(response.getActor().getAuthType()).isEqualTo(ActorType.OAUTH_CLIENT))
+				.assertNext(response -> assertThat(response).isEqualTo(appPermission))
+				.assertNext(response -> assertThat(response).isEqualTo(userPermission))
+				.assertNext(response -> assertThat(response).isEqualTo(clientPermission)).verifyComplete();
 
 		deletePermissionsIfExist();
 
 		StepVerifier.create(this.permissions.getPermissions(CREDENTIAL_NAME))
 				.assertNext(
-						(response) -> assertThat(response.getActor().getAuthType()).isEqualTo(ActorType.OAUTH_CLIENT))
+						response -> assertThat(response.getActor().getAuthType()).isEqualTo(ActorType.OAUTH_CLIENT))
 				.verifyComplete();
 	}
 
@@ -104,7 +104,7 @@ public class ReactivePermissionIntegrationTests extends ReactiveCredHubIntegrati
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value(CREDENTIAL_VALUE).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName()).isEqualTo(CREDENTIAL_NAME);
 					assertThat(response.getId()).isNotNull();
 				}).verifyComplete();
@@ -120,9 +120,9 @@ public class ReactivePermissionIntegrationTests extends ReactiveCredHubIntegrati
 				.expectComplete().verify();
 
 		StepVerifier.create(this.permissions.getPermissions(CREDENTIAL_NAME))
-				.assertNext((response) -> assertThat(response).isEqualTo(appPermission))
-				.assertNext((response) -> assertThat(response).isEqualTo(clientPermission))
-				.assertNext((response) -> assertThat(response).isEqualTo(userPermission)).verifyComplete();
+				.assertNext(response -> assertThat(response).isEqualTo(appPermission))
+				.assertNext(response -> assertThat(response).isEqualTo(clientPermission))
+				.assertNext(response -> assertThat(response).isEqualTo(userPermission)).verifyComplete();
 
 		deletePermissionsIfExist();
 
@@ -130,11 +130,11 @@ public class ReactivePermissionIntegrationTests extends ReactiveCredHubIntegrati
 	}
 
 	private void deletePermissionsIfExist() {
-		this.permissions.deletePermission(CREDENTIAL_NAME, Actor.app("app1")).onErrorResume((e) -> Mono.empty())
+		this.permissions.deletePermission(CREDENTIAL_NAME, Actor.app("app1")).onErrorResume(e -> Mono.empty())
 				.block();
-		this.permissions.deletePermission(CREDENTIAL_NAME, Actor.user("user1")).onErrorResume((e) -> Mono.empty())
+		this.permissions.deletePermission(CREDENTIAL_NAME, Actor.user("user1")).onErrorResume(e -> Mono.empty())
 				.block();
-		this.permissions.deletePermission(CREDENTIAL_NAME, Actor.client("client1")).onErrorResume((e) -> Mono.empty())
+		this.permissions.deletePermission(CREDENTIAL_NAME, Actor.client("client1")).onErrorResume(e -> Mono.empty())
 				.block();
 	}
 

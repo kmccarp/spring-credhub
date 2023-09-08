@@ -169,7 +169,7 @@ final class CredHubRestTemplateFactory {
 
 		OAuth2AuthorizedClientProvider authorizedClientProvider = OAuth2AuthorizedClientProviderBuilder.builder()
 				.authorizationCode().clientCredentials(
-						(b) -> b.accessTokenResponseClient(buildTokenResponseClient(clientHttpRequestFactory)))
+						b -> b.accessTokenResponseClient(buildTokenResponseClient(clientHttpRequestFactory)))
 				.build();
 
 		DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
