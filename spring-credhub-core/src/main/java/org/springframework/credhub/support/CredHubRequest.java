@@ -103,11 +103,7 @@ public class CredHubRequest<T> {
 		if ((this.details != null) ? !this.details.equals(that.details) : (that.details != null)) {
 			return false;
 		}
-		if ((this.mode != null) ? !this.mode.equals(that.mode) : (that.mode != null)) {
-			return false;
-		}
-
-		return true;
+		return !((this.mode != null) ? !this.mode.equals(that.mode) : (that.mode != null));
 	}
 
 	@Override

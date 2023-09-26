@@ -72,7 +72,7 @@ public class CredHubTemplateAutoConfigurationTests {
 	@Test
 	public void credHubTemplatesConfigured() {
 		this.context.withPropertyValues("spring.credhub.url=https://localhost")
-				.withClassLoader(SPRING_SECURITY_FILTERED_CLASS_LOADER).run((context) -> {
+				.withClassLoader(SPRING_SECURITY_FILTERED_CLASS_LOADER).run(context -> {
 					assertThat(context).hasSingleBean(CredHubTemplate.class);
 					CredHubTemplate credHubTemplate = context.getBean(CredHubTemplate.class);
 					assertThat(credHubTemplate.isUsingOAuth2()).isFalse();
@@ -85,7 +85,7 @@ public class CredHubTemplateAutoConfigurationTests {
 
 	@Test
 	public void credHubTemplatesConfiguredWithSpringSecurityWithoutClientId() {
-		this.context.withPropertyValues("spring.credhub.url=https://localhost").run((context) -> {
+		this.context.withPropertyValues("spring.credhub.url=https://localhost").run(context -> {
 			assertThat(context).hasSingleBean(CredHubTemplate.class);
 			CredHubTemplate credHubTemplate = context.getBean(CredHubTemplate.class);
 			assertThat(credHubTemplate.isUsingOAuth2()).isFalse();
@@ -99,7 +99,7 @@ public class CredHubTemplateAutoConfigurationTests {
 	@Test
 	public void reactiveCredHubTemplateNotConfiguredWithoutWebClient() {
 		this.context.withPropertyValues("spring.credhub.url=https://localhost")
-				.withClassLoader(new FilteredClassLoader(WebClient.class)).run((context) -> {
+				.withClassLoader(new FilteredClassLoader(WebClient.class)).run(context -> {
 					assertThat(context).hasSingleBean(CredHubTemplate.class);
 					CredHubTemplate credHubTemplate = context.getBean(CredHubTemplate.class);
 					assertThat(credHubTemplate.isUsingOAuth2()).isFalse();
@@ -118,7 +118,7 @@ public class CredHubTemplateAutoConfigurationTests {
 				"spring.security.oauth2.client.registration.credhub-client.client-secret=test-secret",
 				"spring.security.oauth2.client.registration.credhub-client.authorization-grant-type=client_credentials",
 				"spring.security.oauth2.client.provider.uaa.token-uri=https://example.com/uaa/oauth/token")
-				.run((context) -> {
+				.run(context -> {
 					assertThat(context).hasSingleBean(CredHubTemplate.class);
 					assertThat(context).hasSingleBean(ClientRegistrationRepository.class);
 					assertThat(context).hasSingleBean(OAuth2AuthorizedClientRepository.class);
@@ -145,7 +145,7 @@ public class CredHubTemplateAutoConfigurationTests {
 				"spring.security.oauth2.client.registration.credhub-client.client-secret=test-secret",
 				"spring.security.oauth2.client.registration.credhub-client.authorization-grant-type=client_credentials",
 				"spring.security.oauth2.client.provider.uaa.token-uri=https://example.com/uaa/oauth/token")
-				.withUserConfiguration(ClientManagerConfiguration.class).run((context) -> {
+				.withUserConfiguration(ClientManagerConfiguration.class).run(context -> {
 					assertThat(context).hasSingleBean(CredHubTemplate.class);
 					assertThat(context).hasSingleBean(ClientRegistrationRepository.class);
 					assertThat(context).hasSingleBean(OAuth2AuthorizedClientRepository.class);
@@ -173,7 +173,7 @@ public class CredHubTemplateAutoConfigurationTests {
 				"spring.security.oauth2.client.registration.credhub-client.client-secret=test-secret",
 				"spring.security.oauth2.client.registration.credhub-client.authorization-grant-type=client_credentials",
 				"spring.security.oauth2.client.provider.uaa.token-uri=https://example.com/uaa/oauth/token")
-				.run((context) -> assertThat(context).getFailure().hasMessageContaining(
+				.run(context -> assertThat(context).getFailure().hasMessageContaining(
 						"The CredHub OAuth2 client registration ID 'invalid-client' is not a valid"));
 	}
 
@@ -182,7 +182,7 @@ public class CredHubTemplateAutoConfigurationTests {
 		this.context.withClassLoader(WEB_CLIENT_AND_SECURITY_FILTERED_CLASS_LOADER)
 				.withPropertyValues("spring.credhub.url=https://localhost",
 						"spring.credhub.oauth2.registration-id=credhub-client")
-				.run((context) -> assertThat(context).getFailure()
+				.run(context -> assertThat(context).getFailure()
 						.hasMessageMatching(noSuchBeanExceptionMessage("ClientRegistrationRepository")));
 	}
 
@@ -191,7 +191,7 @@ public class CredHubTemplateAutoConfigurationTests {
 		this.context.withClassLoader(SERVLET_AND_SECURITY_FILTERED_CLASS_LOADER)
 				.withPropertyValues("spring.credhub.url=https://localhost",
 						"spring.credhub.oauth2.registration-id=credhub-client")
-				.run((context) -> assertThat(context).getFailure()
+				.run(context -> assertThat(context).getFailure()
 						.hasMessageMatching(noSuchBeanExceptionMessage("ReactiveClientRegistrationRepository")));
 	}
 
@@ -205,7 +205,7 @@ public class CredHubTemplateAutoConfigurationTests {
 				"spring.security.oauth2.client.registration.credhub-client.client-secret=test-secret",
 				"spring.security.oauth2.client.registration.credhub-client.authorization-grant-type=client_credentials",
 				"spring.security.oauth2.client.provider.uaa.token-uri=https://example.com/uaa/oauth/token")
-				.run((context) -> assertThat(context).hasFailed());
+				.run(context -> assertThat(context).hasFailed());
 	}
 
 	@Test
@@ -218,7 +218,7 @@ public class CredHubTemplateAutoConfigurationTests {
 				"spring.security.oauth2.client.registration.credhub-client.client-secret=test-secret",
 				"spring.security.oauth2.client.registration.credhub-client.authorization-grant-type=client_credentials",
 				"spring.security.oauth2.client.provider.uaa.token-uri=https://example.com/uaa/oauth/token")
-				.run((context) -> assertThat(context).hasFailed());
+				.run(context -> assertThat(context).hasFailed());
 	}
 
 	private String noSuchBeanExceptionMessage(final String className) {
