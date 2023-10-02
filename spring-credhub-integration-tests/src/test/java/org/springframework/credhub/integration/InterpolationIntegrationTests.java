@@ -60,13 +60,10 @@ public class InterpolationIntegrationTests extends CredHubIntegrationTests {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void interpolate() throws IOException {
-		Map<String, Object> json = new HashMap<String, Object>() {
-			{
-				put("url", "https://example.com");
-				put("username", "user");
-				put("password", "secret");
-			}
-		};
+		Map<String, Object> json = new HashMap<>();
+		json.put("url","https://example.com");
+		json.put("username","user");
+		json.put("password","secret");
 
 		CredentialDetails<JsonCredential> written = this.credentials
 				.write(JsonCredentialRequest.builder().name(CREDENTIAL_NAME).value(json).build());

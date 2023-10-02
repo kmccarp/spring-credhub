@@ -72,7 +72,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value(CREDENTIAL_VALUE).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
@@ -82,26 +82,26 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 				}).verifyComplete();
 
 		StepVerifier.create(this.credentials.getById(written.get().getId(), ValueCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
 				}).verifyComplete();
 
 		StepVerifier.create(this.credentials.getByName(CREDENTIAL_NAME, ValueCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
 				}).verifyComplete();
 
 		StepVerifier.create(this.credentials.findByName(new SimpleCredentialName("/test")))
-				.assertNext((response) -> assertThat(response).extracting("name").extracting("name").asString()
+				.assertNext(response -> assertThat(response).extracting("name").extracting("name").asString()
 						.contains(CREDENTIAL_NAME.getName()))
 				.verifyComplete();
 
 		StepVerifier.create(this.credentials.findByPath("/spring-credhub/integration-test"))
-				.assertNext((response) -> assertThat(response).extracting("name").extracting("name").asString()
+				.assertNext(response -> assertThat(response).extracting("name").extracting("name").asString()
 						.contains(CREDENTIAL_NAME.getName()))
 				.verifyComplete();
 	}
@@ -113,7 +113,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value(CREDENTIAL_VALUE).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
@@ -123,7 +123,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value("new-value").build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo("new-value");
 				}).verifyComplete();
@@ -138,7 +138,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 		StepVerifier
 				.create(this.credentials
 						.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME).value(CREDENTIAL_VALUE).build()))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
@@ -146,13 +146,13 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 				}).verifyComplete();
 
 		StepVerifier.create(this.credentials.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME)
-				.value("new-value").mode(WriteMode.NO_OVERWRITE).build())).assertNext((response) -> {
+				.value("new-value").mode(WriteMode.NO_OVERWRITE).build())).assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 				}).verifyComplete();
 
 		StepVerifier.create(this.credentials.write(ValueCredentialRequest.builder().name(CREDENTIAL_NAME)
-				.value("new-value").mode(WriteMode.OVERWRITE).build())).assertNext((response) -> {
+				.value("new-value").mode(WriteMode.OVERWRITE).build())).assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo("new-value");
 				}).verifyComplete();
@@ -162,22 +162,22 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 
 	private void verifyHistory() {
 		StepVerifier.create(this.credentials.getByNameWithHistory(CREDENTIAL_NAME, ValueCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo("new-value");
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
-				}).assertNext((response) -> {
+				}).assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
 				}).verifyComplete();
 
 		StepVerifier.create(this.credentials.getByNameWithHistory(CREDENTIAL_NAME, 2, ValueCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo("new-value");
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
-				}).assertNext((response) -> {
+				}).assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getValue()).isEqualTo(CREDENTIAL_VALUE);
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.VALUE);
@@ -190,7 +190,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 
 		StepVerifier.create(this.credentials.generate(UserParametersRequest.builder().name(CREDENTIAL_NAME)
 				.username("test-user").parameters(this.passwordParameters.build()).build(), UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getCredentialType()).isEqualTo(CredentialType.USER);
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
@@ -201,11 +201,11 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 				}).verifyComplete();
 
 		StepVerifier.create(this.credentials.getById(generated.get().getId(), UserCredential.class))
-				.assertNext((response) -> assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName()))
+				.assertNext(response -> assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName()))
 				.verifyComplete();
 
 		StepVerifier.create(this.credentials.regenerate(CREDENTIAL_NAME, UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword()).matches("^[a-zA-Z0-9\\p{Punct}]{12}$");
@@ -222,7 +222,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 
 		StepVerifier.create(this.credentials.generate(UserParametersRequest.builder().name(CREDENTIAL_NAME)
 				.username("test-user").parameters(this.passwordParameters.build()).build(), UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword()).matches("^[a-zA-Z0-9\\p{Punct}]{12}$");
@@ -236,7 +236,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 						UserParametersRequest.builder().name(CREDENTIAL_NAME).mode(WriteMode.NO_OVERWRITE)
 								.username("test-user").parameters(this.passwordParameters.build()).build(),
 						UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword()).isEqualTo(generated.get().getValue().getPassword());
 					assertThat(response.getValue().getPasswordHash())
@@ -250,7 +250,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 
 		StepVerifier.create(this.credentials.generate(UserParametersRequest.builder().name(CREDENTIAL_NAME)
 				.username("test-user").parameters(this.passwordParameters.build()).build(), UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword()).matches("^[a-zA-Z0-9\\p{Punct}]{12}$");
@@ -264,7 +264,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 						UserParametersRequest.builder().name(CREDENTIAL_NAME).mode(WriteMode.OVERWRITE)
 								.username("test-user").parameters(this.passwordParameters.build()).build(),
 						UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword())
 							.isNotEqualTo(generated.get().getValue().getPassword());
@@ -279,7 +279,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 
 		StepVerifier.create(this.credentials.generate(UserParametersRequest.builder().name(CREDENTIAL_NAME)
 				.username("test-user").parameters(this.passwordParameters.build()).build(), UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getName().getName()).isEqualTo(CREDENTIAL_NAME.getName());
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword()).matches("^[a-zA-Z0-9\\p{Punct}]{12}$");
@@ -293,7 +293,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 						UserParametersRequest.builder().name(CREDENTIAL_NAME).mode(WriteMode.CONVERGE)
 								.username("test-user").parameters(this.passwordParameters.build()).build(),
 						UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword()).isEqualTo(generated.get().getValue().getPassword());
 					assertThat(response.getValue().getPasswordHash())
@@ -307,7 +307,7 @@ public class ReactiveCredentialIntegrationTests extends ReactiveCredHubIntegrati
 						UserParametersRequest.builder().name(CREDENTIAL_NAME).mode(WriteMode.CONVERGE)
 								.username("test-user").parameters(this.passwordParameters.build()).build(),
 						UserCredential.class))
-				.assertNext((response) -> {
+				.assertNext(response -> {
 					assertThat(response.getValue().getUsername()).isEqualTo("test-user");
 					assertThat(response.getValue().getPassword())
 							.isNotEqualTo(generated.get().getValue().getPassword());

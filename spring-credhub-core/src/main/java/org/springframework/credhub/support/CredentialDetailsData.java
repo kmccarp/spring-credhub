@@ -71,7 +71,7 @@ public class CredentialDetailsData<T> {
 
 		CredentialDetailsData that = (CredentialDetailsData) o;
 
-		return (this.data != null) ? this.data.equals(that.data) : (that.data == null);
+		return this.data != null ? this.data.equals(that.data) : (that.data == null);
 	}
 
 	@Override
