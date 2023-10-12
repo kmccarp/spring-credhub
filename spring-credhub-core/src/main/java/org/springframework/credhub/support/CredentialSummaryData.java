@@ -70,7 +70,7 @@ public class CredentialSummaryData {
 
 		CredentialSummaryData that = (CredentialSummaryData) o;
 
-		return (this.credentials != null) ? this.credentials.equals(that.credentials) : (that.credentials == null);
+		return this.credentials != null ? this.credentials.equals(that.credentials) : (that.credentials == null);
 	}
 
 	@Override

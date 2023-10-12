@@ -55,7 +55,7 @@ public class CredHubPermissionV2Template implements CredHubPermissionV2Operation
 	public CredentialPermission getPermissions(final String id) {
 		Assert.notNull(id, "credential ID must not be null");
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialPermission> response = restOperations.getForEntity(PERMISSIONS_ID_URL_PATH,
 					CredentialPermission.class, id);
 			return response.getBody();
@@ -67,7 +67,7 @@ public class CredHubPermissionV2Template implements CredHubPermissionV2Operation
 		Assert.notNull(path, "credential path must not be null");
 		Assert.notNull(actor, "credential actor must not be null");
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialPermission> response = restOperations.getForEntity(
 					PERMISSIONS_PATH_ACTOR_URL_QUERY, CredentialPermission.class, path.getName(), actor.getIdentity());
 			return response.getBody();
@@ -81,7 +81,7 @@ public class CredHubPermissionV2Template implements CredHubPermissionV2Operation
 
 		final CredentialPermission credentialPermission = new CredentialPermission(path, permission);
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialPermission> response = restOperations.exchange(PERMISSIONS_URL_PATH,
 					HttpMethod.POST, new HttpEntity<>(credentialPermission), CredentialPermission.class);
 			return response.getBody();
@@ -97,7 +97,7 @@ public class CredHubPermissionV2Template implements CredHubPermissionV2Operation
 
 		final CredentialPermission credentialPermission = new CredentialPermission(path, permission);
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CredentialPermission> response = restOperations.exchange(PERMISSIONS_ID_URL_PATH,
 					HttpMethod.PUT, new HttpEntity<>(credentialPermission), CredentialPermission.class, id);
 			return response.getBody();
@@ -108,7 +108,7 @@ public class CredHubPermissionV2Template implements CredHubPermissionV2Operation
 	public void deletePermission(final String id) {
 		Assert.notNull(id, "credential ID must not be null");
 
-		this.credHubOperations.doWithRest((restOperations) -> {
+		this.credHubOperations.doWithRest(restOperations -> {
 			restOperations.delete(PERMISSIONS_ID_URL_PATH, id);
 			return null;
 		});

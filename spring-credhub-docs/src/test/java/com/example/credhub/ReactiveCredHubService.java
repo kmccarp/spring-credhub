@@ -45,12 +45,12 @@ public class ReactiveCredHubService {
 		return this.credHubOperations.credentials()
 				.generate(PasswordParametersRequest.builder().name(this.credentialName).parameters(parameters).build(),
 						PasswordCredential.class)
-				.map((password) -> password.getValue().getPassword());
+				.map(password -> password.getValue().getPassword());
 	}
 
 	public Mono<String> getPassword() {
 		return this.credHubOperations.credentials().getByName(this.credentialName, PasswordCredential.class)
-				.map((password) -> password.getValue().getPassword());
+				.map(password -> password.getValue().getPassword());
 	}
 
 }

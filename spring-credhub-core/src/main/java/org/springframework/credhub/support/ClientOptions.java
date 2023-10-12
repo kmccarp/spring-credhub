@@ -69,7 +69,7 @@ public class ClientOptions {
 	 * @return the connection timeout; can be {@literal null if not explicitly set}
 	 */
 	public Integer getConnectionTimeoutMillis() {
-		return (this.connectionTimeout == null) ? null : Math.toIntExact(this.connectionTimeout.toMillis());
+		return this.connectionTimeout == null ? null : Math.toIntExact(this.connectionTimeout.toMillis());
 	}
 
 	public void setConnectionTimeout(Duration connectionTimeout) {
@@ -89,7 +89,7 @@ public class ClientOptions {
 	 * @return the read timeout; can be {@literal null if not explicitly set}
 	 */
 	public Integer getReadTimeoutMillis() {
-		return (this.readTimeout == null) ? null : Math.toIntExact(this.readTimeout.toMillis());
+		return this.readTimeout == null ? null : Math.toIntExact(this.readTimeout.toMillis());
 	}
 
 	public void setReadTimeout(Duration readTimeout) {

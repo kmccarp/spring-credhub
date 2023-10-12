@@ -120,10 +120,10 @@ public final class Permission {
 
 		Permission that = (Permission) o;
 
-		if ((this.actor != null) ? !this.actor.equals(that.actor) : (that.actor != null)) {
+		if (this.actor != null ? !this.actor.equals(that.actor) : (that.actor != null)) {
 			return false;
 		}
-		return (this.operations != null) ? this.operations.equals(that.operations) : (that.operations == null);
+		return this.operations != null ? this.operations.equals(that.operations) : (that.operations == null);
 	}
 
 	@Override
@@ -254,7 +254,7 @@ public final class Permission {
 		 */
 		public Permission build() {
 			List<Operation> operations;
-			switch ((this.operations == null) ? 0 : this.operations.size()) {
+			switch (this.operations == null ? 0 : this.operations.size()) {
 				case 0:
 					operations = java.util.Collections.emptyList();
 					break;

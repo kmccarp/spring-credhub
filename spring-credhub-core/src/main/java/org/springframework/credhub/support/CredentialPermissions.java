@@ -83,11 +83,11 @@ public class CredentialPermissions {
 
 		CredentialPermissions that = (CredentialPermissions) o;
 
-		if ((this.credentialName != null) ? !this.credentialName.equals(that.credentialName)
+		if (this.credentialName != null ? !this.credentialName.equals(that.credentialName)
 				: (that.credentialName != null)) {
 			return false;
 		}
-		return (this.permissions != null) ? this.permissions.equals(that.permissions) : (that.permissions == null);
+		return this.permissions != null ? this.permissions.equals(that.permissions) : (that.permissions == null);
 	}
 
 	@Override

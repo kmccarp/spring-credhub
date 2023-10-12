@@ -71,7 +71,7 @@ public class CredHubCertificateTemplate implements CredHubCertificateOperations 
 
 	@Override
 	public List<CertificateSummary> getAll() {
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CertificateSummaryData> response = restOperations.getForEntity(BASE_URL_PATH,
 					CertificateSummaryData.class);
 
@@ -85,7 +85,7 @@ public class CredHubCertificateTemplate implements CredHubCertificateOperations 
 	public CertificateSummary getByName(final CredentialName name) {
 		Assert.notNull(name, "certificate name must not be null");
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			ResponseEntity<CertificateSummaryData> response = restOperations.getForEntity(NAME_URL_QUERY,
 					CertificateSummaryData.class, name.getName());
 
@@ -99,10 +99,10 @@ public class CredHubCertificateTemplate implements CredHubCertificateOperations 
 	public CertificateCredentialDetails regenerate(final String id, final boolean setAsTransitional) {
 		Assert.notNull(id, "credential ID must not be null");
 
-		final ParameterizedTypeReference<CertificateCredentialDetails> ref = new ParameterizedTypeReference<CertificateCredentialDetails>() {
+		final ParameterizedTypeReference<CertificateCredentialDetails> ref = new ParameterizedTypeReference<>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			Map<String, Boolean> request = new HashMap<>(1);
 			request.put(TRANSITIONAL_REQUEST_FIELD, setAsTransitional);
 
@@ -119,10 +119,10 @@ public class CredHubCertificateTemplate implements CredHubCertificateOperations 
 	public List<CredentialName> regenerate(final CredentialName certificateName) {
 		Assert.notNull(certificateName, "certificate name must not be null");
 
-		final ParameterizedTypeReference<Map<String, List<CredentialName>>> ref = new ParameterizedTypeReference<Map<String, List<CredentialName>>>() {
+		final ParameterizedTypeReference<Map<String, List<CredentialName>>> ref = new ParameterizedTypeReference<>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			Map<String, Object> request = new HashMap<>(1);
 			request.put(SIGNED_BY_REQUEST_FIELD, certificateName.getName());
 
@@ -138,10 +138,10 @@ public class CredHubCertificateTemplate implements CredHubCertificateOperations 
 	public List<CertificateCredentialDetails> updateTransitionalVersion(final String id, final String versionId) {
 		Assert.notNull(id, "credential ID must not be null");
 
-		final ParameterizedTypeReference<List<CertificateCredentialDetails>> ref = new ParameterizedTypeReference<List<CertificateCredentialDetails>>() {
+		final ParameterizedTypeReference<List<CertificateCredentialDetails>> ref = new ParameterizedTypeReference<>() {
 		};
 
-		return this.credHubOperations.doWithRest((restOperations) -> {
+		return this.credHubOperations.doWithRest(restOperations -> {
 			Map<String, String> request = new HashMap<>(1);
 			request.put(VERSION_REQUEST_FIELD, versionId);
 
