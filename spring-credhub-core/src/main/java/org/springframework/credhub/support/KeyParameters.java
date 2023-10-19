@@ -45,7 +45,7 @@ public class KeyParameters {
 	 * @return the value of the parameter; will be {@literal null} if not explicitly set
 	 */
 	public Integer getKeyLength() {
-		return (this.keyLength == null) ? null : this.keyLength.getLength();
+		return this.keyLength == null ? null : this.keyLength.getLength();
 	}
 
 }

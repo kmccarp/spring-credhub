@@ -60,7 +60,7 @@ public class CredHubRequest<T> {
 	 */
 	@JsonInclude
 	public String getName() {
-		return (this.name == null) ? null : this.name.getName();
+		return this.name == null ? null : this.name.getName();
 	}
 
 	void setName(CredentialName name) {
@@ -94,20 +94,16 @@ public class CredHubRequest<T> {
 
 		CredHubRequest that = (CredHubRequest) o;
 
-		if ((this.name != null) ? !this.name.equals(that.name) : (that.name != null)) {
+		if (this.name != null ? !this.name.equals(that.name) : (that.name != null)) {
 			return false;
 		}
 		if (this.credentialType != that.credentialType) {
 			return false;
 		}
-		if ((this.details != null) ? !this.details.equals(that.details) : (that.details != null)) {
+		if (this.details != null ? !this.details.equals(that.details) : (that.details != null)) {
 			return false;
 		}
-		if ((this.mode != null) ? !this.mode.equals(that.mode) : (that.mode != null)) {
-			return false;
-		}
-
-		return true;
+		return !(this.mode != null ? !this.mode.equals(that.mode) : (that.mode != null));
 	}
 
 	@Override

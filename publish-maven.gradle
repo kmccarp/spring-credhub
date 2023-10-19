@@ -62,7 +62,9 @@ publishing {
 				withXml {
 					def pomNode = asNode()
 					def dependencyManagementNode = pomNode.get('dependencyManagement')
-					if (dependencyManagementNode) pomNode.remove(dependencyManagementNode)
+                    if (dependencyManagementNode) {
+                        pomNode.remove(dependencyManagementNode)
+                    }
 				}
 			}
 

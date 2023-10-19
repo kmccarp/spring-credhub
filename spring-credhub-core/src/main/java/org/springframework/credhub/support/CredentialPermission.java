@@ -97,13 +97,13 @@ public class CredentialPermission {
 
 		CredentialPermission that = (CredentialPermission) o;
 
-		if ((this.uuid != null) ? !this.uuid.equals(that.uuid) : (that.uuid != null)) {
+		if (this.uuid != null ? !this.uuid.equals(that.uuid) : (that.uuid != null)) {
 			return false;
 		}
-		if ((this.path != null) ? !this.path.equals(that.path) : (that.path != null)) {
+		if (this.path != null ? !this.path.equals(that.path) : (that.path != null)) {
 			return false;
 		}
-		return (this.permission != null) ? this.permission.equals(that.permission) : (that.permission == null);
+		return this.permission != null ? this.permission.equals(that.permission) : (that.permission == null);
 	}
 
 	@Override

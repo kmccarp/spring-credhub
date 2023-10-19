@@ -69,7 +69,7 @@ public class CertificateSummaryData {
 
 		CertificateSummaryData that = (CertificateSummaryData) o;
 
-		return (this.certificates != null) ? this.certificates.equals(that.certificates) : (that.certificates == null);
+		return this.certificates != null ? this.certificates.equals(that.certificates) : (that.certificates == null);
 	}
 
 	@Override

@@ -64,7 +64,7 @@ public final class ClientHttpConnectorFactory {
 			TrustManagerFactory trustManagerFactory = sslCertificateUtils
 					.createTrustManagerFactory(options.getCaCertFiles());
 
-			httpClient = httpClient.secure((sslContextSpec) -> {
+			httpClient = httpClient.secure(sslContextSpec -> {
 				try {
 					sslContextSpec.sslContext(SslContextBuilder.forClient().sslProvider(SslProvider.JDK)
 							.trustManager(trustManagerFactory).build());
@@ -76,7 +76,7 @@ public final class ClientHttpConnectorFactory {
 			});
 		}
 		else {
-			httpClient = httpClient.secure((sslContextSpec) -> {
+			httpClient = httpClient.secure(sslContextSpec -> {
 				try {
 					sslContextSpec.sslContext(new JdkSslContext(SSLContext.getDefault(), true, null,
 							IdentityCipherSuiteFilter.INSTANCE, null, ClientAuth.REQUIRE, null, false));

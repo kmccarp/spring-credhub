@@ -79,10 +79,10 @@ public class CredentialSummary {
 
 		CredentialSummary that = (CredentialSummary) o;
 
-		if ((this.name != null) ? !this.name.equals(that.name) : (that.name != null)) {
+		if (this.name != null ? !this.name.equals(that.name) : (that.name != null)) {
 			return false;
 		}
-		return (this.versionCreatedAt != null) ? this.versionCreatedAt.equals(that.versionCreatedAt)
+		return this.versionCreatedAt != null ? this.versionCreatedAt.equals(that.versionCreatedAt)
 				: (that.versionCreatedAt == null);
 	}
 
